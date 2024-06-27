@@ -332,61 +332,61 @@
 
 
 		function act_addAset(){
-
 			$config['upload_path']          = './assets/berkas';
 			$config['allowed_types']        = 'jpg|png|jpeg';
-			$config['min_size']             = 9000000;
+			$config['max_size']             = 9000; // Size in KB
 			$config['remove_spaces']        = false;
-			$config['encrypt_name'] 		= true;
-
-
+			$config['encrypt_name']         = true;
+		
 			$this->load->library('upload', $config);
-			if (!$this->upload->do_upload("foto")){
-				$error = array('error' => $this->upload->display_errors());
-				$this->session->set_flashdata('message', 'swal("Oops", "Ada kesalahan dalam upload gambar", "warning" );');
-				redirect('app/data_aset');
-
-			}else{
-				$img = array('upload_data' => $this->upload->data());
-				$new_name = $img['upload_data']['file_name'];
-
-				$kode = base_url('aset/index/').$this->input->post('kode');
-
-				$this->generateQr($kode);
-				$qr = bin2hex($kode);
-
-				$data = [
-					'kode' => $this->input->post('kode'),
-					'nama_aset' => $this->input->post('nama_aset'),
-					'kategori' => $this->input->post('kategori'),
-					'model' => $this->input->post('model'),
-					'sn'  => $this->input->post('serial_number'),
-					'tgl_beli' => $this->input->post('tgl_beli'),
-					'masa_garansi' => $this->input->post('masa_garansi'),
-					'lantai' => $this->input->post('lantai'),
-					'lokasi_aset' => $this->input->post('lokasi_aset'),
-					'ip' => $this->input->post('ip'),
-					'ram' => $this->input->post('ram'),
-					'processor' => $this->input->post('processor'),
-					'storage' => $this->input->post('storage'),
-					'os' => $this->input->post('os'),
-					'monitor' => $this->input->post('monitor'),
-					'user' => $this->input->post('user'),
-					'foto' => $new_name,
-					'qr' => $qr
-
-				];
-
-
-
-
-				$this->db->insert('tbl_aset', $data);
-				$this->session->set_flashdata('message', 'swal("Yess", "Data berhasil ditambah", "success");');
-				redirect('app/data_aset');
-
+		
+			// Initialize variables
+			$new_name = '';
+		
+			// Check if a file is uploaded
+			if (!empty($_FILES['foto']['name'])) {
+				if (!$this->upload->do_upload("foto")) {
+					$error = array('error' => $this->upload->display_errors());
+					$this->session->set_flashdata('message', 'swal("Oops", "Ada kesalahan dalam upload gambar", "warning" );');
+					redirect('app/data_aset');
+				} else {
+					$img = array('upload_data' => $this->upload->data());
+					$new_name = $img['upload_data']['file_name'];
+				}
 			}
-
+		
+			$kode = base_url('aset/index/').$this->input->post('kode');
+		
+			$this->generateQr($kode);
+			$qr = bin2hex($kode);
+		
+			$data = [
+				'kode' => $this->input->post('kode'),
+				'nama_aset' => $this->input->post('nama_aset'),
+				'kategori' => $this->input->post('kategori'),
+				'model' => $this->input->post('model'),
+				'sn'  => $this->input->post('serial_number'),
+				'tgl_beli' => $this->input->post('tgl_beli'),
+				'masa_garansi' => $this->input->post('masa_garansi'),
+				'lantai' => $this->input->post('lantai'),
+				'lokasi_aset' => $this->input->post('lokasi_aset'),
+				'ip' => $this->input->post('ip'),
+				'ram' => $this->input->post('ram'),
+				'processor' => $this->input->post('processor'),
+				'storage' => $this->input->post('storage'),
+				'os' => $this->input->post('os'),
+				'monitor' => $this->input->post('monitor'),
+				'user' => $this->input->post('user'),
+				'foto' => $new_name,
+				'qr' => $qr
+			];
+		
+			$this->db->insert('tbl_aset', $data);
+			$this->session->set_flashdata('message', 'swal("Yess", "Data berhasil ditambah", "success");');
+			redirect('app/data_aset');
 		}
+
+		
 
 
 		function act_hapusaset(){

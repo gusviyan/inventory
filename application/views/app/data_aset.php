@@ -176,8 +176,8 @@ function sisaHariGaransi($tanggalPembelian, $masaGaransi)
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="cetakqr" >Cetak QR Aset</button>
-        <form method="post" action="<?= base_url('app/cetakqr') ?>" target="_blank">
+        <!-- <button type="submit" class="btn btn-primary" id="cetakqr" >Cetak QR Aset</button>
+        <form method="post" action="<?= base_url('app/cetakqr') ?>" target="_blank"> -->
 
           <button type="submit" class="btn btn-primary" id="actklik" style="display:none">Cetak QR</button>
 
@@ -205,8 +205,8 @@ function sisaHariGaransi($tanggalPembelian, $masaGaransi)
                   <th>OS</th>
                   <th>Monitor</th>
                   <th>User</th>
-                  <th>Foto</th>
-                  <th>QR</th>
+                  <!-- <th>Foto</th>
+                  <th>QR</th> -->
                   <th>Opsi</th>
                   </tr>
                 </thead>
@@ -253,12 +253,12 @@ function sisaHariGaransi($tanggalPembelian, $masaGaransi)
                     <td><?= $data['monitor'] ?></td>
                     <td><?= $data['user'] ?></td>
 
-                  <td>
+                  <!-- <td>
                     <a href="<?= base_url('assets/berkas/') ?><?= $data['foto'] ?>" target="_blank"><img src="<?= base_url('assets/berkas/') ?><?= $data['foto'] ?>" style="height: 50px;"></a>
                   </td>
                   <td>
                     <img src="<?= base_url('assets/qr/') ?><?= $data['qr'] ?>.png" style="height: 50px;" onclick="window.location.href='<?= base_url('aset/index/') ?><?= $data['kode'] ?>'">
-                  </td>
+                  </td> -->
                   <td>
                     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModaledit<?= $data['id'] ?>"><i class="fa fa-pen"></i> Edit</a>
 
@@ -529,8 +529,8 @@ function sisaHariGaransi($tanggalPembelian, $masaGaransi)
                   <th>OS</th>
                   <th>Monitor</th>
                   <th>User</th>
-                  <th>Foto</th>
-                  <th>QR</th>
+                  <!-- <th>Foto</th>
+                  <th>QR</th> -->
                   <th>Opsi</th>
           </tr>
         </tfoot>
