@@ -655,7 +655,7 @@ class CPDF_Adapter implements Canvas {
       	  imageinterlace($img, false);
       	}
 
-      	$this->_pdf->addImagePng($img_url, $x, $this->y($y) - $h, $w, $h, $img);
+      	$this->_pdf->addImagePng($img_url, $x, $this->y($y) - $h, $img, $w, $h);
 
         if ( $img ) {
       	  imagedestroy($img);
